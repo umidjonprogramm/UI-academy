@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>UI Academy — onlayn o’quv markazi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        --bg: #fffdf6;
+        --surf: #fff;
+        --ink: #2a2208;
+        --mut: #76694a;
+        --line: #eadfc2;
+        --pri: #9a6a00;
+        --pri-d: #6f4b00;
+        --side: #6f4b00;
+        --on: #fff;
+        --acc: #e0b030;
+        --ok: #1d8a5a;
+        --bad: #c0392b;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          color-scheme: dark;
+          --bg: #16120a;
+          --surf: #211b0d;
+          --ink: #f6efdb;
+          --mut: #c2b48a;
+          --line: #3d3216;
+          --pri: #e0b030;
+          --pri-d: #f0cc66;
+          --side: #2c2410;
+          --on: #1a1400;
+          --acc: #e0b030;
+          --ok: #47c68b;
+          --bad: #ff8a7a;
+        }
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #16120a;
+        --surf: #211b0d;
+        --ink: #f6efdb;
+        --mut: #c2b48a;
+        --line: #3d3216;
+        --pri: #e0b030;
+        --pri-d: #f0cc66;
+        --side: #2c2410;
+        --on: #1a1400;
+        --acc: #e0b030;
+        --ok: #47c68b;
+        --bad: #ff8a7a;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.55 Manrope,
+          system-ui,
+          sans-serif;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.15;
+        margin: 0 0 0.5em;
+        font-weight: 800;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      header.top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 20px;
+        text-decoration: none;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .logo i {
+        width: 28px;
+        height: 28px;
+        border-radius: 50% 50% 50% 4px;
+        background: var(--pri);
+        display: inline-block;
+        border: 3px solid var(--acc);
+      }
+      nav a {
+        margin-left: 18px;
+        text-decoration: none;
+        color: var(--mut);
+        font-weight: 600;
+      }
+      button,
+      .btn {
+        font: inherit;
+        font-weight: 700;
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 18px;
+        cursor: pointer;
+        background: var(--pri);
+        color: var(--on);
+        text-decoration: none;
+        display: inline-block;
+      }
+      button.alt,
+      .btn.alt {
+        background: transparent;
+        color: var(--ink);
+        border: 1.5px solid var(--line);
+      }
+      button.sm {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+      button.del {
+        background: transparent;
+        color: var(--bad);
+        border: 1.5px solid var(--line);
+      }
+      :focus-visible {
+        outline: 3px solid var(--acc);
+        outline-offset: 2px;
+      }
+      .hero {
+        padding: 56px 0 40px;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 32px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(34px, 6vw, 56px);
+        letter-spacing: -0.02em;
+      }
+      .hero p {
+        color: var(--mut);
+        font-size: 18px;
+        max-width: 46ch;
+      }
+      .hero .cta {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+        flex-wrap: wrap;
+      }
+      .tile {
+        aspect-ratio: 1;
+        border-radius: 24px;
+        background: conic-gradient(
+          from 45deg at 50% 50%,
+          var(--pri) 0 25%,
+          var(--surf) 0 50%,
+          var(--pri-d) 0 75%,
+          var(--acc) 0
+        );
+        position: relative;
+        overflow: hidden;
+        max-width: 380px;
+        justify-self: center;
+        width: 100%;
+      }
+      .tile::after {
+        content: "";
+        position: absolute;
+        inset: 18%;
+        background: var(--surf);
+        border-radius: 50%;
+        box-shadow: 0 0 0 10px var(--bg) inset;
+      }
+      .stats {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        padding: 18px 0 40px;
+        color: var(--mut);
+      }
+      .stats b {
+        display: block;
+        font-size: 28px;
+        color: var(--ink);
+      }
+      section.blk {
+        padding: 30px 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: var(--surf);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px;
+      }
+      .card h3 {
+        font-size: 18px;
+      }
+      .price {
+        color: var(--pri-d);
+        font-weight: 800;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 13px;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        padding: 2px 10px;
+        color: var(--mut);
+      }
+      footer {
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--mut);
+        border-top: 1px solid var(--line);
+        margin-top: 30px;
+      }
+      /* login */
+      .auth {
+        min-height: 80vh;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+      }
+      .auth form {
+        background: var(--surf);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px;
+        width: 100%;
+        max-width: 400px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        margin: 14px 0 6px;
+      }
+      input,
+      select {
+        width: 100%;
+        font: inherit;
+        padding: 11px 12px;
+        border-radius: 10px;
+        border: 1.5px solid var(--line);
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .err {
+        color: var(--bad);
+        min-height: 22px;
+        margin: 10px 0 0;
+        font-size: 14px;
+      }
+      .hint {
+        background: var(--bg);
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 14px;
+        color: var(--mut);
+        margin-top: 14px;
+      }
+      /* panel */
+      .panel {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        min-height: 100vh;
+      }
+      aside {
+        background: var(--side);
+        color: #fff;
+        padding: 20px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      :root[data-theme="dark"] aside,
+      :root:not([data-theme="light"]) aside {
+        --x: 0;
+      }
+      aside .logo {
+        color: #fff;
+        margin-bottom: 14px;
+        padding: 0 8px;
+      }
+      aside button {
+        background: transparent;
+        text-align: left;
+        color: #fbefc8;
+        border-radius: 8px;
+      }
+      aside button.on {
+        background: rgba(255, 255, 255, 0.16);
+        color: #fff;
+      }
+      aside .sp {
+        flex: 1;
+      }
+      main.pn {
+        padding: 24px;
+        min-width: 0;
+      }
+      .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+      .kpi b {
+        font-size: 30px;
+        display: block;
+      }
+      .kpi span {
+        color: var(--mut);
+        font-size: 14px;
+      }
+      .tw {
+        overflow-x: auto;
+        background: var(--surf);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 560px;
+      }
+      th,
+      td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        font-size: 15px;
+      }
+      th {
+        color: var(--mut);
+        font-weight: 600;
+        font-size: 14px;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      td .tag.ok {
+        color: var(--ok);
+      }
+      td .tag.no {
+        color: var(--bad);
+      }
+      dialog {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surf);
+        color: var(--ink);
+        padding: 22px;
+        width: min(420px, 92vw);
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.45);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 18px;
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+        transform: translateX(-50%);
+        background: var(--ink);
+        color: var(--bg);
+        padding: 10px 18px;
+        border-radius: 99px;
+        font-weight: 600;
+        z-index: 9;
+      }
+      @media (max-width: 760px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .panel {
+          grid-template-columns: 1fr;
+        }
+        aside {
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+        aside .logo {
+          width: 100%;
+          margin: 0;
+        }
+        aside .sp {
+          display: none;
+        }
+        nav a:not(.btn) {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      (function () {
+        var CODE = document.currentScript.textContent,
+          CSS = document.querySelector("style").textContent;
+        var seed = {
+          courses: [
+            {
+              id: 1,
+              name: "Ingliz tili (IELTS)",
+              teacher: "Dilnoza Karimova",
+              price: 450000,
+              months: 4,
+            },
+            {
+              id: 2,
+              name: "Dasturlash: Python",
+              teacher: "Aziz Rahmonov",
+              price: 600000,
+              months: 5,
+            },
+            {
+              id: 3,
+              name: "Matematika (abituriyent)",
+              teacher: "Sherzod Ismoilov",
+              price: 350000,
+              months: 6,
+            },
+            {
+              id: 4,
+              name: "Grafik dizayn",
+              teacher: "Madina Yusupova",
+              price: 500000,
+              months: 3,
+            },
+          ],
+          students: [],
+          lessons: [],
+          admin: {
+            u: "admin",
+            s: "7c41e9a05b2d3f68",
+            h: "a891986cbe8247305ed17928c9b5f0e1982f4084d6477d1f1e64e0b06848e96e",
+          },
+        };
+        function load() {
+          try {
+            var e = document.getElementById("state");
+            if (e) return JSON.parse(e.textContent);
+          } catch (x) {}
+          return JSON.parse(JSON.stringify(seed));
+        }
+        var db = load(),
+          timer = null;
+        async function hash(s, p) {
+          var b = await crypto.subtle.digest(
+            "SHA-256",
+            new TextEncoder().encode(s + ":" + p),
+          );
+          return Array.from(new Uint8Array(b))
+            .map(function (x) {
+              return x.toString(16).padStart(2, "0");
+            })
+            .join("");
+        }
+        function salt() {
+          return Array.from(crypto.getRandomValues(new Uint8Array(8)))
+            .map(function (x) {
+              return x.toString(16).padStart(2, "0");
+            })
+            .join("");
+        }
+        function save() {
+          clearTimeout(timer);
+          timer = setTimeout(pub, 500);
+        }
+        async function pub() {
+          try {
+            var a = window.claude && (await claude.use("artifact"));
+            if (!a) {
+              toast(
+                "Saqlanmadi: sayt egasi claude.ai hisobiga kirgan bo’lishi kerak",
+              );
+              return;
+            }
+            var json = JSON.stringify(db).replace(/</g, "\\u003c");
+            var html =
+              '<!DOCTYPE html>\n<html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>UI Academy — onlayn o’quv markazi</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet"><style>' +
+              CSS +
+              '</style></head><body><div id="app"></div><script id="state" type="application/json">' +
+              json +
+              "<\/script><script>" +
+              CODE +
+              "<\/script></body></html>";
+            await a.publish(html);
+          } catch (e) {
+            if (e && e.code === "conflict") return;
+            toast("Saqlanmadi: faqat sayt egasi o’zgartira oladi");
+          }
+        }
+        function getSess() {
+          try {
+            return JSON.parse(sessionStorage.getItem("s"));
+          } catch (e) {
+            return null;
+          }
+        }
+        function setSess(s) {
+          try {
+            s
+              ? sessionStorage.setItem("s", JSON.stringify(s))
+              : sessionStorage.removeItem("s");
+          } catch (e) {}
+          window._s = s;
+        }
+        window._s = getSess();
+        var $ = function (s, r) {
+          return (r || document).querySelector(s);
+        };
+        var fmt = function (n) {
+          return Number(n).toLocaleString("ru-RU") + " so’m";
+        };
+        var esc = function (t) {
+          return String(t).replace(/[&<>"]/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+          });
+        };
+        var cname = function (id) {
+          var c = db.courses.find(function (x) {
+            return x.id == id;
+          });
+          return c ? c.name : "—";
+        };
+        var tab = "dash";
+        try {
+          tab = sessionStorage.getItem("t") || "dash";
+        } catch (e) {}
+        function toast(m) {
+          var t = document.createElement("div");
+          t.className = "toast";
+          t.textContent = m;
+          document.body.appendChild(t);
+          setTimeout(function () {
+            t.remove();
+          }, 2200);
+        }
+
+        function home() {
+          var cards = db.courses
+            .map(function (c) {
+              return (
+                '<div class="card"><span class="tag">' +
+                c.months +
+                ' oy</span><h3 style="margin-top:10px">' +
+                esc(c.name) +
+                '</h3><p style="color:var(--mut);margin:0 0 10px">O’qituvchi: ' +
+                esc(c.teacher) +
+                '</p><span class="price">' +
+                fmt(c.price) +
+                " / oy</span></div>"
+              );
+            })
+            .join("");
+          return (
+            '<header class="top"><a class="logo" href="#"><i></i>UI Academy</a><nav><a href="#kurslar">Kurslar</a><a href="#aloqa">Aloqa</a><a class="btn" href="#kirish">Kirish</a></nav></header>' +
+            '<div class="wrap"><div class="hero"><div><h1>Uydan turib o’rganing, natijaga erishing</h1><p>Tajribali o’qituvchilar bilan jonli onlayn darslar, uy vazifalari va shaxsiy kabinet — hammasi bir joyda.</p><div class="cta"><a class="btn" href="#kirish">Kabinetga kirish</a><a class="btn alt" href="#kurslar">Kurslarni ko’rish</a></div></div><div class="tile" role="img" aria-label="Bezak"></div></div>' +
+            '<div class="stats"><div><b>' +
+            db.lessons.length +
+            "</b>onlayn dars</div><div><b>" +
+            db.courses.length +
+            "</b>yo’nalish</div><div><b>4–6 oy</b>kurs davomiyligi</div></div>" +
+            '<section class="blk" id="kurslar"><h2>Kurslar</h2><div class="grid">' +
+            cards +
+            "</div></section>" +
+            '<section class="blk" id="aloqa"><h2>Aloqa</h2><div class="card"><p style="margin:0">Telefon: +998 71 000 00 00<br>Telegram: @ui_academy<br>Dars vaqti: har kuni 09:00–20:00</p></div></section></div>' +
+            "<footer>© 2026 UI Academy</footer>"
+          );
+        }
+
+        function login() {
+          return '<header class="top"><a class="logo" href="#"><i></i>UI Academy</a></header><div class="auth"><form id="lf"><h2>Tizimga kirish</h2><label for="u">Login</label><input id="u" autocomplete="username" required><label for="p">Parol</label><input id="p" type="password" autocomplete="current-password" required><p class="err" id="er" role="alert"></p><button style="width:100%">Kirish</button><div class="hint">Login va parolni o’quv markaz administratoridan oling.</div></form></div>';
+        }
+
+        function dash() {
+          var paid = db.students.filter(function (s) {
+            return s.paid;
+          }).length;
+          var rev = db.students
+            .filter(function (s) {
+              return s.paid;
+            })
+            .reduce(function (a, s) {
+              var c = db.courses.find(function (x) {
+                return x.id == s.course;
+              });
+              return a + (c ? c.price : 0);
+            }, 0);
+          var recent = db.students
+            .slice(-4)
+            .reverse()
+            .map(function (s) {
+              return (
+                "<tr><td>" +
+                esc(s.name) +
+                "</td><td>" +
+                esc(cname(s.course)) +
+                '</td><td><span class="tag ' +
+                (s.paid ? "ok" : "no") +
+                '">' +
+                (s.paid ? "To’lagan" : "Qarzdor") +
+                "</span></td></tr>"
+              );
+            })
+            .join("");
+          return (
+            '<div class="bar"><h2>Bosh sahifa</h2></div><div class="kpis"><div class="card kpi"><b>' +
+            db.students.length +
+            '</b><span>O’quvchilar</span></div><div class="card kpi"><b>' +
+            db.courses.length +
+            '</b><span>Kurslar</span></div><div class="card kpi"><b>' +
+            paid +
+            "/" +
+            db.students.length +
+            '</b><span>To’lov qilganlar</span></div><div class="card kpi"><b style="font-size:22px;padding:5px 0">' +
+            fmt(rev) +
+            '</b><span>Tushum</span></div></div><h3>So’nggi o’quvchilar</h3><div class="tw"><table><tr><th>Ism</th><th>Kurs</th><th>To’lov</th></tr>' +
+            (recent || '<tr><td colspan="3">Hali o’quvchi yo’q</td></tr>') +
+            "</table></div>"
+          );
+        }
+
+        function students() {
+          var rows = db.students
+            .map(function (s) {
+              return (
+                "<tr><td>" +
+                esc(s.name) +
+                "</td><td>" +
+                esc(s.phone) +
+                "</td><td>" +
+                esc(s.login) +
+                "</td><td>••••</td><td>" +
+                esc(cname(s.course)) +
+                '</td><td><button class="sm alt" data-pay="' +
+                s.id +
+                '">' +
+                (s.paid ? "To’lagan" : "Qarzdor") +
+                '</button></td><td><button class="sm alt" data-es="' +
+                s.id +
+                '">Tahrirlash</button> <button class="sm del" data-ds="' +
+                s.id +
+                '">O’chirish</button></td></tr>'
+              );
+            })
+            .join("");
+          return (
+            '<div class="bar"><h2>O’quvchilar</h2><button id="addS">O’quvchi qo’shish</button></div><div class="tw"><table><tr><th>Ism</th><th>Telefon</th><th>Login</th><th>Parol</th><th>Kurs</th><th>To’lov</th><th></th></tr>' +
+            (rows ||
+              '<tr><td colspan="7">Ro’yxat bo’sh. “O’quvchi qo’shish” tugmasini bosing.</td></tr>') +
+            "</table></div>"
+          );
+        }
+
+        function courses() {
+          var rows = db.courses
+            .map(function (c) {
+              return (
+                "<tr><td>" +
+                esc(c.name) +
+                "</td><td>" +
+                esc(c.teacher) +
+                "</td><td>" +
+                fmt(c.price) +
+                "</td><td>" +
+                c.months +
+                ' oy</td><td><button class="sm alt" data-ec="' +
+                c.id +
+                '">Tahrirlash</button> <button class="sm del" data-dc="' +
+                c.id +
+                '">O’chirish</button></td></tr>'
+              );
+            })
+            .join("");
+          return (
+            '<div class="bar"><h2>Kurslar</h2><button id="addC">Kurs qo’shish</button></div><div class="tw"><table><tr><th>Nomi</th><th>O’qituvchi</th><th>Narxi (oyiga)</th><th>Muddat</th><th></th></tr>' +
+            (rows ||
+              '<tr><td colspan="5">Kurs yo’q. “Kurs qo’shish” tugmasini bosing.</td></tr>') +
+            "</table></div>"
+          );
+        }
+
+        function lessons() {
+          var rows = db.lessons
+            .slice()
+            .sort(function (a, b) {
+              return a.when < b.when ? -1 : 1;
+            })
+            .map(function (l) {
+              return (
+                "<tr><td>" +
+                esc(l.title) +
+                "</td><td>" +
+                esc(cname(l.course)) +
+                "</td><td>" +
+                esc(l.when.replace("T", " ")) +
+                '</td><td><a href="' +
+                esc(l.link) +
+                '" target="_blank" rel="noopener">Ochish</a></td><td><button class="sm alt" data-el="' +
+                l.id +
+                '">Tahrirlash</button> <button class="sm del" data-dl="' +
+                l.id +
+                '">O’chirish</button></td></tr>'
+              );
+            })
+            .join("");
+          return (
+            '<div class="bar"><h2>Onlayn darslar</h2><button id="addL">Dars qo’shish</button></div><div class="tw"><table><tr><th>Mavzu</th><th>Kurs</th><th>Vaqti</th><th>Havola</th><th></th></tr>' +
+            (rows ||
+              '<tr><td colspan="5">Dars yo’q. “Dars qo’shish” tugmasini bosing.</td></tr>') +
+            "</table></div>"
+          );
+        }
+        function lDlg(id) {
+          var l = db.lessons.find(function (x) {
+            return x.id == id;
+          }) || {
+            title: "",
+            course: db.courses[0] ? db.courses[0].id : 0,
+            when: "",
+            link: "",
+          };
+          var opts = db.courses
+            .map(function (c) {
+              return (
+                '<option value="' +
+                c.id +
+                '"' +
+                (c.id == l.course ? " selected" : "") +
+                ">" +
+                esc(c.name) +
+                "</option>"
+              );
+            })
+            .join("");
+          dlg(
+            "<h3>" +
+              (id ? "Darsni tahrirlash" : "Yangi onlayn dars") +
+              "</h3>" +
+              f("Dars mavzusi", "lt", l.title) +
+              '<label for="lc">Kurs</label><select id="lc">' +
+              opts +
+              "</select>" +
+              f("Sana va vaqt", "lw", l.when, "datetime-local") +
+              f("Dars havolasi (Zoom, Meet, YouTube)", "ll", l.link, "url"),
+            function (d) {
+              var o = {
+                title: $("#lt", d).value.trim(),
+                course: +$("#lc", d).value,
+                when: $("#lw", d).value,
+                link: $("#ll", d).value.trim(),
+              };
+              if (!/^https?:\/\//i.test(o.link)) {
+                toast("Havola https:// bilan boshlanishi kerak");
+                return false;
+              }
+              if (id) Object.assign(l, o);
+              else {
+                o.id = Date.now();
+                db.lessons.push(o);
+              }
+              save();
+              toast("Saqlandi");
+              render();
+            },
+          );
+        }
+        function sett() {
+          var a = db.admin;
+          return (
+            '<div class="bar"><h2>Sozlamalar</h2></div><div class="card" style="max-width:380px"><h3>Administrator kirishi</h3>' +
+            f("Login", "au", a.u) +
+            '<label for="ap">Yangi parol</label><input id="ap" type="text" autocomplete="new-password" required><p class="hint">Ma’lumotlar sayt ichida saqlanadi. O’zgartirishlarni faqat sayt egasi (claude.ai hisobiga kirgan holda) saqlay oladi.</p>' +
+            '<div class="row"><button id="sv">Saqlash</button></div></div>'
+          );
+        }
+        function panel() {
+          var body =
+            tab === "dash"
+              ? dash()
+              : tab === "st"
+                ? students()
+                : tab === "co"
+                  ? courses()
+                  : tab === "le"
+                    ? lessons()
+                    : sett();
+          var nav = [
+            ["dash", "Bosh sahifa"],
+            ["st", "O’quvchilar"],
+            ["co", "Kurslar"],
+            ["le", "Onlayn darslar"],
+            ["se", "Sozlamalar"],
+          ]
+            .map(function (t) {
+              return (
+                '<button data-tab="' +
+                t[0] +
+                '" class="' +
+                (tab === t[0] ? "on" : "") +
+                '">' +
+                t[1] +
+                "</button>"
+              );
+            })
+            .join("");
+          return (
+            '<div class="panel"><aside><a class="logo" href="#"><i></i>UI Academy</a>' +
+            nav +
+            '<span class="sp"></span><button id="out">Chiqish</button></aside><main class="pn">' +
+            body +
+            '</main></div><dialog id="dg"></dialog>'
+          );
+        }
+
+        function cab() {
+          var s = db.students.find(function (x) {
+            return x.id == window._s.sid;
+          }) || { name: window._s.name, course: 0, paid: false };
+          var c = db.courses.find(function (x) {
+            return x.id == s.course;
+          });
+          var ls = db.lessons
+            .filter(function (l) {
+              return l.course == s.course;
+            })
+            .sort(function (a, b) {
+              return a.when < b.when ? -1 : 1;
+            })
+            .map(function (l) {
+              return (
+                '<div class="card"><span class="tag">' +
+                esc(l.when.replace("T", " ")) +
+                '</span><h3 style="margin:10px 0">' +
+                esc(l.title) +
+                '</h3><a class="btn" style="padding:8px 14px" target="_blank" rel="noopener" href="' +
+                esc(l.link) +
+                '">Darsga kirish</a></div>'
+              );
+            })
+            .join("");
+          var lsec =
+            '<section class="blk"><h2>Onlayn darslar</h2>' +
+            (ls
+              ? '<div class="grid">' + ls + "</div>"
+              : '<p style="color:var(--mut)">Hozircha dars qo’shilmagan.</p>') +
+            "</section>";
+          return (
+            '<header class="top"><a class="logo" href="#"><i></i>UI Academy</a><nav><button class="alt sm" id="out">Chiqish</button></nav></header><div class="wrap"><section class="blk"><h2>Salom, ' +
+            esc(s.name.split(" ")[0]) +
+            '!</h2><div class="grid"><div class="card"><span class="tag">Mening kursim</span><h3 style="margin-top:10px">' +
+            esc(c ? c.name : "Kurs biriktirilmagan") +
+            '</h3><p style="color:var(--mut);margin:0">' +
+            (c
+              ? "O’qituvchi: " + esc(c.teacher)
+              : "Administrator bilan bog’laning.") +
+            '</p></div><div class="card"><span class="tag">To’lov holati</span><h3 style="margin-top:10px;color:var(--' +
+            (s.paid ? "ok" : "bad") +
+            ')">' +
+            (s.paid ? "To’langan" : "To’lov kutilmoqda") +
+            "</h3>" +
+            (c
+              ? '<p style="margin:0" class="price">' +
+                fmt(c.price) +
+                " / oy</p>"
+              : "") +
+            "</div></div></section>" +
+            lsec +
+            "</div>"
+          );
+        }
+
+        function dlg(html, onOk) {
+          var d = $("#dg");
+          d.innerHTML =
+            '<form method="dialog">' +
+            html +
+            '<div class="row"><button class="alt" value="x" formnovalidate>Bekor qilish</button><button value="ok">Saqlash</button></div></form>';
+          d.showModal();
+          $("form", d).addEventListener("submit", function (e) {
+            if (e.submitter && e.submitter.value === "ok") {
+              if (onOk(d) === false) e.preventDefault();
+            }
+          });
+        }
+        function f(l, id, v, t) {
+          return (
+            '<label for="' +
+            id +
+            '">' +
+            l +
+            '</label><input id="' +
+            id +
+            '" type="' +
+            (t || "text") +
+            '" value="' +
+            esc(v == null ? "" : v) +
+            '" required>'
+          );
+        }
+        function stDlg(id) {
+          var s = db.students.find(function (x) {
+            return x.id == id;
+          }) || {
+            name: "",
+            phone: "+998 ",
+            login: "",
+            pass: "",
+            course: db.courses[0] ? db.courses[0].id : 0,
+          };
+          var opts = db.courses
+            .map(function (c) {
+              return (
+                '<option value="' +
+                c.id +
+                '"' +
+                (c.id == s.course ? " selected" : "") +
+                ">" +
+                esc(c.name) +
+                "</option>"
+              );
+            })
+            .join("");
+          dlg(
+            "<h3>" +
+              (id ? "O’quvchini tahrirlash" : "Yangi o’quvchi") +
+              "</h3>" +
+              f("Ism-familiya", "fn", s.name) +
+              f("Telefon", "fp", s.phone, "tel") +
+              f("Login (o’quvchi uchun)", "fl", s.login) +
+              '<label for="fw">Parol' +
+              (id ? " (o’zgartirmasangiz bo’sh qoldiring)" : "") +
+              '</label><input id="fw" type="text" autocomplete="off"' +
+              (id ? "" : " required") +
+              ">" +
+              '<label for="fc">Kurs</label><select id="fc">' +
+              opts +
+              "</select>",
+            function (d) {
+              var o = {
+                name: $("#fn", d).value.trim(),
+                phone: $("#fp", d).value.trim(),
+                login: $("#fl", d).value.trim(),
+                pw: $("#fw", d).value.trim(),
+                course: +$("#fc", d).value,
+              };
+              if (!o.name || !o.login || (!id && !o.pw)) return false;
+              var lg = o.login.toLowerCase();
+              if (
+                lg === String(db.admin.u).toLowerCase() ||
+                db.students.some(function (x) {
+                  return x.id != s.id && x.login.toLowerCase() === lg;
+                })
+              ) {
+                toast("Bu login band. Boshqa login tanlang.");
+                return false;
+              }
+              (async function () {
+                var pw = o.pw;
+                delete o.pw;
+                if (pw) {
+                  o.s = salt();
+                  o.h = await hash(o.s, pw);
+                }
+                if (id) Object.assign(s, o);
+                else {
+                  o.id = Date.now();
+                  o.paid = false;
+                  db.students.push(o);
+                }
+                save();
+                toast("Saqlandi");
+                render();
+              })();
+            },
+          );
+        }
+        function coDlg(id) {
+          var c = db.courses.find(function (x) {
+            return x.id == id;
+          }) || { name: "", teacher: "", price: 400000, months: 3 };
+          dlg(
+            "<h3>" +
+              (id ? "Kursni tahrirlash" : "Yangi kurs") +
+              "</h3>" +
+              f("Kurs nomi", "cn", c.name) +
+              f("O’qituvchi", "ct", c.teacher) +
+              f("Narxi (so’m, oyiga)", "cp", c.price, "number") +
+              f("Davomiyligi (oy)", "cm", c.months, "number"),
+            function (d) {
+              var o = {
+                name: $("#cn", d).value.trim(),
+                teacher: $("#ct", d).value.trim(),
+                price: +$("#cp", d).value,
+                months: +$("#cm", d).value,
+              };
+              if (!o.name) return;
+              if (id) Object.assign(c, o);
+              else {
+                o.id = Date.now();
+                db.courses.push(o);
+              }
+              save();
+              toast("Saqlandi");
+              render();
+            },
+          );
+        }
+
+        function bind() {
+          var o = $("#out");
+          if (o)
+            o.onclick = function () {
+              setSess(null);
+              location.hash = "#";
+            };
+          var lf = $("#lf");
+          if (lf)
+            lf.onsubmit = function (e) {
+              e.preventDefault();
+              var u = $("#u").value.trim().toLowerCase(),
+                p = $("#p").value;
+              (async function () {
+                var adm = db.admin,
+                  st = db.students.find(function (x) {
+                    return x.login.toLowerCase() === u;
+                  });
+                if (
+                  u === String(adm.u).toLowerCase() &&
+                  (await hash(adm.s, p)) === adm.h
+                ) {
+                  setSess({ role: "admin" });
+                  location.hash = "#panel";
+                } else if (st && (await hash(st.s, p)) === st.h) {
+                  setSess({ role: "student", sid: st.id, name: st.name });
+                  location.hash = "#kabinet";
+                } else
+                  $("#er").textContent =
+                    "Login yoki parol noto’g’ri. Qayta urinib ko’ring.";
+              })();
+            };
+          document.querySelectorAll("[data-tab]").forEach(function (b) {
+            b.onclick = function () {
+              tab = b.dataset.tab;
+              try {
+                sessionStorage.setItem("t", tab);
+              } catch (e) {}
+              render();
+            };
+          });
+          var a = $("#addS");
+          if (a)
+            a.onclick = function () {
+              stDlg();
+            };
+          var al = $("#addL");
+          if (al)
+            al.onclick = function () {
+              lDlg();
+            };
+          document.querySelectorAll("[data-el]").forEach(function (b) {
+            b.onclick = function () {
+              lDlg(b.dataset.el);
+            };
+          });
+          document.querySelectorAll("[data-dl]").forEach(function (b) {
+            b.onclick = function () {
+              if (confirm("Dars o’chirilsinmi?")) {
+                db.lessons = db.lessons.filter(function (x) {
+                  return x.id != b.dataset.dl;
+                });
+                save();
+                toast("O’chirildi");
+                render();
+              }
+            };
+          });
+          var sv = $("#sv");
+          if (sv)
+            sv.onclick = async function () {
+              var u = $("#au").value.trim(),
+                p = $("#ap").value.trim();
+              if (!u || !p) {
+                toast("Login va yangi parolni kiriting");
+                return;
+              }
+              var sl = salt();
+              db.admin = { u: u, s: sl, h: await hash(sl, p) };
+              save();
+              toast("Saqlandi");
+            };
+          var c = $("#addC");
+          if (c)
+            c.onclick = function () {
+              coDlg();
+            };
+          document.querySelectorAll("[data-es]").forEach(function (b) {
+            b.onclick = function () {
+              stDlg(b.dataset.es);
+            };
+          });
+          document.querySelectorAll("[data-ec]").forEach(function (b) {
+            b.onclick = function () {
+              coDlg(b.dataset.ec);
+            };
+          });
+          document.querySelectorAll("[data-pay]").forEach(function (b) {
+            b.onclick = function () {
+              var s = db.students.find(function (x) {
+                return x.id == b.dataset.pay;
+              });
+              s.paid = !s.paid;
+              save();
+              render();
+            };
+          });
+          document.querySelectorAll("[data-ds]").forEach(function (b) {
+            b.onclick = function () {
+              if (confirm("O’quvchi o’chirilsinmi?")) {
+                db.students = db.students.filter(function (x) {
+                  return x.id != b.dataset.ds;
+                });
+                save();
+                toast("O’chirildi");
+                render();
+              }
+            };
+          });
+          document.querySelectorAll("[data-dc]").forEach(function (b) {
+            b.onclick = function () {
+              if (confirm("Kurs o’chirilsinmi?")) {
+                db.courses = db.courses.filter(function (x) {
+                  return x.id != b.dataset.dc;
+                });
+                save();
+                toast("O’chirildi");
+                render();
+              }
+            };
+          });
+        }
+
+        function render() {
+          var h = location.hash.replace("#", ""),
+            s = window._s,
+            v;
+          if (h === "panel")
+            v =
+              s && s.role === "admin"
+                ? panel()
+                : ((location.hash = "#kirish"), login());
+          else if (h === "kabinet")
+            v =
+              s && s.role === "student"
+                ? cab()
+                : ((location.hash = "#kirish"), login());
+          else if (h === "kirish") v = login();
+          else v = home();
+          $("#app").innerHTML = v;
+          bind();
+          if (h === "kurslar" || h === "aloqa") {
+            var e = document.getElementById(h);
+            if (e) e.scrollIntoView();
+          }
+        }
+        window.addEventListener("hashchange", render);
+        render();
+      })();
+    </script>
+  </body>
+</html>
